@@ -106,12 +106,40 @@ This application is configured for easy deployment to Heroku using a `Procfile` 
 
 ---
 
-## API Endpoints (Phase 1)
+## API Endpoints
 
-The following endpoints are available:
+| Method | Endpoint                  | Description                |
+|--------|---------------------------|----------------------------|
+| `GET`    | `/api/employees`          | Get a list of all employees. |
+| `GET`    | `/api/employees/{id}`     | Get a single employee by ID. |
+| `POST`   | `/api/employees`          | Create a new employee.     |
+| `PUT`    | `/api/employees/{id}`     | Update an employee's details.|
+| `DELETE` | `/api/employees/{id}`     | Delete an employee.        |
 
-*   **`GET /api/employees`**: Get a list of all employees.
-*   **`GET /api/employees/{id}`**: Get a single employee by ID.
-*   **`POST /api/employees`**: Create a new employee.
-*   **`PUT /api/employees/{id}`**: Update an employee's details.
-*   **`DELETE /api/employees/{id}`**: Delete an employee.
+---
+
+## Versioning and Releases
+
+This project follows semantic versioning (`major.minor.patch`). To create a new release, use the `bump2version` tool.
+
+First, make sure you have installed the project dependencies, including `bump2version`.
+
+To bump the version, use one of the following commands:
+```bash
+# Bump a patch version (e.g., 0.1.0 -> 0.1.1)
+bump2version patch
+
+# Bump a minor version (e.g., 0.1.1 -> 0.2.0)
+bump2version minor
+
+# Bump a major version (e.g., 0.2.0 -> 1.0.0)
+bump2version major
+```
+
+This will automatically update the version in `app.py`, create a new Git commit, and tag the commit with the new version (e.g., `v1.0.0`).
+
+To trigger the automated release workflow, push the newly created tag to GitHub:
+```bash
+git push --tags
+```
+This will trigger a GitHub Action that creates a new release on the project's GitHub page.

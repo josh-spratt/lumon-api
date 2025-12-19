@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 import os
 from flask_sqlalchemy import SQLAlchemy
 
+__version__ = "0.1.0"
+
 app = Flask(__name__)
 
 # Database configuration
@@ -58,6 +60,11 @@ def init_db_command():
     """Clear the existing data and create new tables."""
     init_db()
     print("Initialized the database.")
+
+
+@app.route('/version', methods=['GET'])
+def get_version():
+    return jsonify({'version': __version__})
 
 
 @app.route('/api/employees', methods=['GET'])

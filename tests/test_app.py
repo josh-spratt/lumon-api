@@ -17,21 +17,22 @@ def client():
     
     with app_module.app.test_client() as client:
         with app_module.app.app_context():
-            # Create all tables in the in-memory database
-            app_module.db.create_all()
+            # Mock the init_db function to prevent pre-populating
+            with patch('app.init_db'):
+                app_module.db.create_all()
 
-            # Pre-populate some data for tests
-            employees_data = [
-                {'first_name': 'Mark', 'last_name': 'Scout', 'department': 'Macrodata Refinement', 'is_severed': True, 'mode': 'innie'},
-                {'first_name': 'Dylan', 'last_name': 'George', 'department': 'Macrodata Refinement', 'is_severed': True, 'mode': 'innie'},
-                {'first_name': 'Irving', 'last_name': 'Bailiff', 'department': 'Macrodata Refinement', 'is_severed': True, 'mode': 'innie'}
-            ]
-            for emp_data in employees_data:
-                employee = app_module.Employee(**emp_data)
-                app_module.db.session.add(employee)
-            app_module.db.session.commit()
+                # Pre-populate some data for tests
+                employees_data = [
+                    {'first_name': 'Mark', 'last_name': 'Scout', 'department': 'Macrodata Refinement', 'is_severed': True, 'mode': 'innie'},
+                    {'first_name': 'Dylan', 'last_name': 'George', 'department': 'Macrodata Refinement', 'is_severed': True, 'mode': 'innie'},
+                    {'first_name': 'Irving', 'last_name': 'Bailiff', 'department': 'Macrodata Refinement', 'is_severed': True, 'mode': 'innie'}
+                ]
+                for emp_data in employees_data:
+                    employee = app_module.Employee(**emp_data)
+                    app_module.db.session.add(employee)
+                app_module.db.session.commit()
 
-        yield client # This is where the test code runs
+                yield client # This is where the test code runs
 
         with app_module.app.app_context():
             # Clean up after each test: drop all tables
@@ -102,6 +103,14 @@ def test_delete_nonexistent_employee(client):
     response = client.delete('/api/employees/999')
     assert response.status_code == 404
     assert 'Employee not found' in response.json['message']
+
+
+def test_get_version(client):
+    response = client.get('/version')
+    assert response.status_code == 200
+    # Assert that the version is in the format x.y.z
+    assert len(response.json['version'].split('.')) == 3
+
 
 def test_create_employee_missing_data(client):
     response = client.post('/api/employees', json={
