@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "first_name": "Mark",
+    "last_name": "Scout",
+    "department": "Macrodata Refinement",
+    "is_severed": true,
+    "mode": "innie"
+  },
+  {
+    "id": 2,
+    "first_name": "Dylan",
+    "last_name": "George",
+    "department": "Macrodata Refinement",
+    "is_severed": true,
+    "mode": "innie"
+  },
+  {
+    "id": 3,
+    "first_name": "Irving",
+    "last_name": "Bailiff",
+    "department": "Macrodata Refinement",
+    "is_severed": true,
+    "mode": "innie"
+  },
+  {
+    "id": 4,
+    "first_name": "Helly",
+    "last_name": "Riggs",
+    "department": "Macrodata Refinement",
+    "is_severed": true,
+    "mode": "innie"
+  },
+  {
+    "id": 5,
+    "first_name": "Seth",
+    "last_name": "Milchick",
+    "department": "Management",
+    "is_severed": false,
+    "mode": "outie"
+  },
+  {
+    "id": 6,
+    "first_name": "Harmony",
+    "last_name": "Cobel",
+    "department": "Management",
+    "is_severed": false,
+    "mode": "outie"
+  }
+]
