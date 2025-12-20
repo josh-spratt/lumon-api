@@ -7,16 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-- Your new feature here.
+## [1.0.0] - 2025-12-20
 
 ### Changed
-- An existing feature that was modified.
 
-### Fixed
-- A bug fix.
+- Re-architected the application to remove all database dependencies. Data is now served from a static `employees.json` file, making the application read-only.
 
-## [0.1.0] - 2025-12-20
+### Removed
+
+- All database-related dependencies (`Flask-SQLAlchemy`, `psycopg2-binary`).
+- API endpoints for creating, updating, and deleting employees (`POST /api/employees`, `PUT /api/employees/{id}`, `DELETE /api/employees/{id}`).
+- The `init-db` command and all related database setup instructions.
+
+## [0.2.1] - 2025-12-20
 
 ### Added
 - Initial implementation of the employee API.
