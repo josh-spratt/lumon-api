@@ -66,10 +66,10 @@ pytest
 
 ## API Endpoints
 
-| Method | Endpoint                  | Description                |
-|--------|---------------------------|----------------------------|
-| `GET`    | `/api/employees`          | Get a list of all employees. |
-| `GET`    | `/api/employees/{id}`     | Get a single employee by ID. |
+| Method | Endpoint                    | Description                |
+|--------|-----------------------------|----------------------------|
+| `GET`    | `/lumon-api/employees`      | Get a list of all employees. |
+| `GET`    | `/lumon-api/employees/{id}` | Get a single employee by ID. |
 
 ---
 
