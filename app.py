@@ -13,11 +13,11 @@ with open('employees.json') as f:
 def get_version():
     return jsonify({'version': __version__})
 
-@app.route('/api/employees', methods=['GET'])
+@app.route('/lumon-api/employees', methods=['GET'])
 def get_employees():
     return jsonify(employees)
 
-@app.route('/api/employees/<int:employee_id>', methods=['GET'])
+@app.route('/lumon-api/employees/<int:employee_id>', methods=['GET'])
 def get_employee(employee_id):
     employee = next((emp for emp in employees if emp['id'] == employee_id), None)
     if employee:

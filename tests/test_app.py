@@ -16,19 +16,19 @@ def client():
         yield client
 
 def test_get_all_employees(client):
-    response = client.get('/api/employees')
+    response = client.get('/lumon-api/employees')
     assert response.status_code == 200
     with open('employees.json') as f:
         employees_data = json.load(f)
     assert len(response.json) == len(employees_data)
 
 def test_get_single_employee(client):
-    response = client.get('/api/employees/1')
+    response = client.get('/lumon-api/employees/1')
     assert response.status_code == 200
     assert response.json['first_name'] == 'Mark'
 
 def test_get_nonexistent_employee(client):
-    response = client.get('/api/employees/999')
+    response = client.get('/lumon-api/employees/999')
     assert response.status_code == 404
     assert 'Employee not found' in response.json['message']
 
