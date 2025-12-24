@@ -75,40 +75,6 @@ FLASK_ENV=testing pytest
 
 ---
 
-## Deployment to Heroku
-
-This application is configured for easy deployment to Heroku using a `Procfile` and a PostgreSQL database.
-
-1.  **Ensure you have the Heroku CLI installed** and are logged in.
-2.  **Create a Heroku app:**
-    ```bash
-    heroku create your-app-name # Replace with a unique app name
-    ```
-3.  **Add the Heroku Postgres add-on (Hobby Dev - free tier):**
-    ```bash
-    heroku addons:create heroku-postgresql:hobby-dev
-    ```
-    This automatically sets the `DATABASE_URL` environment variable for your app.
-4.  **Set the API Key:**
-    Create a secret API key and set it as a config var on Heroku:
-    ```bash
-    # Generate a random key
-    openssl rand -hex 32
-    # Set the key on Heroku (replace <your-generated-key>)
-    heroku config:set LUMON_API_KEY=<your-generated-key>
-    ```
-5.  **Push your code to Heroku:**
-    ```bash
-    git push heroku main
-    ```
-6.  **Initialize the database on Heroku:**
-    ```bash
-    heroku run flask init-db
-    ```
-    This command runs `init_db()` on a one-off dyno, creating your database tables and populating them.
-
----
-
 ## API Authentication
 
 All API endpoints are protected and require a valid API key to be sent in the `X-API-Key` header.
