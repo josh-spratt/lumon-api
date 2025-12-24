@@ -4,7 +4,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 import functools
 
-__version__ = "2.0.0"
+__version__ = "3.0.0"
 
 app = Flask(__name__)
 

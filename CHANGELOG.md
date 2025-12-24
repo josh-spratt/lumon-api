@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2025-12-23
+
 ### Added
 - Re-integrated `Flask-SQLAlchemy` for database persistence with PostgreSQL on Heroku and SQLite for local development.
 - Implemented full CRUD functionality with `POST`, `PUT`, and `DELETE` endpoints for managing employees.
