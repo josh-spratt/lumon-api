@@ -3,4 +3,4 @@ pytest
 gunicorn
 bump2version
 Flask-SQLAlchemy
-psycopg2-binary
+psycopg2
