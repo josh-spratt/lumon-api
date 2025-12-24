@@ -35,7 +35,7 @@ With the ability to modify data, it's critical to secure the endpoints. A simple
 *   **Mechanism:** All `POST`, `PUT`, and `DELETE` requests must include a valid API key.
 *   **Implementation:** The key will be passed in a request header, for example: `X-API-Key: <your-secret-key>`.
 *   **Configuration:** The server will validate the key against a secret key stored in an environment variable (`LUMON_API_KEY`), ensuring no secrets are hardcoded in the source code.
-*   **Access Control:** `GET` requests will remain open and will not require authentication, allowing public read-access.
+*   **Access Control:** All API endpoints, including `GET` requests, are protected and require authentication.
 
 ### 2.4. Thematic Endpoint: Mode Switching
 To lean into the *Severance* theme, a dedicated endpoint will be created to manage an employee's "innie" or "outie" state.
