@@ -44,32 +44,91 @@ With your virtual environment activated, install the required packages:
 pip install -r requirements.txt
 ```
 
-### 4. Run the Application
+### 4. Initialize the Database
+
+The application uses SQLAlchemy. Locally, it defaults to a SQLite database named `app.db`. You need to initialize the database schema by running the `init-db` command:
+
+```bash
+export FLASK_APP=app.py
+flask init-db
+```
+This command will create the `app.db` file and pre-populate it with sample employee data if it's empty.
+
+### 5. Run the Application
 
 To start the Flask development server:
 
 ```bash
+export FLASK_APP=app.py
 flask run
 ```
 
 The API will typically be available at `http://127.0.0.1:5000/`.
 
-### 5. Run Tests
+### 6. Run Tests
 
-To execute the unit tests for the application:
+To execute the unit tests for the application (which use an in-memory SQLite database for isolation):
 
 ```bash
-pytest
+FLASK_ENV=testing pytest
+```
+
+---
+
+## Deployment to Heroku
+
+This application is configured for easy deployment to Heroku using a `Procfile` and a PostgreSQL database.
+
+1.  **Ensure you have the Heroku CLI installed** and are logged in.
+2.  **Create a Heroku app:**
+    ```bash
+    heroku create your-app-name # Replace with a unique app name
+    ```
+3.  **Add the Heroku Postgres add-on (Hobby Dev - free tier):**
+    ```bash
+    heroku addons:create heroku-postgresql:hobby-dev
+    ```
+    This automatically sets the `DATABASE_URL` environment variable for your app.
+4.  **Set the API Key:**
+    Create a secret API key and set it as a config var on Heroku:
+    ```bash
+    # Generate a random key
+    openssl rand -hex 32
+    # Set the key on Heroku (replace <your-generated-key>)
+    heroku config:set LUMON_API_KEY=<your-generated-key>
+    ```
+5.  **Push your code to Heroku:**
+    ```bash
+    git push heroku main
+    ```
+6.  **Initialize the database on Heroku:**
+    ```bash
+    heroku run flask init-db
+    ```
+    This command runs `init_db()` on a one-off dyno, creating your database tables and populating them.
+
+---
+
+## API Authentication
+
+All API endpoints are protected and require a valid API key to be sent in the `X-API-Key` header.
+
+```
+X-API-Key: <your-secret-api-key>
 ```
 
 ---
 
 ## API Endpoints
 
-| Method | Endpoint                    | Description                |
-|--------|-----------------------------|----------------------------|
-| `GET`    | `/lumon-api/employees`      | Get a list of all employees. |
-| `GET`    | `/lumon-api/employees/{id}` | Get a single employee by ID. |
+| Method | Endpoint                            | Description                       | Auth Required? |
+|--------|-------------------------------------|-----------------------------------|----------------|
+| `GET`    | `/lumon-api/employees`              | Get a list of all employees.      | Yes            |
+| `GET`    | `/lumon-api/employees/{id}`         | Get a single employee by ID.      | Yes            |
+| `POST`   | `/lumon-api/employees`              | Create a new employee.            | Yes            |
+| `PUT`    | `/lumon-api/employees/{id}`         | Update an employee's details.     | Yes            |
+| `DELETE` | `/lumon-api/employees/{id}`         | Delete an employee.               | Yes            |
+| `POST`   | `/lumon-api/employees/{id}/toggle-mode` | Switch an employee's mode. | Yes            |
 
 ---
 
